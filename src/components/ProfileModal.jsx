@@ -14,15 +14,12 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { ViewIcon } from '@chakra-ui/icons';
-import { ChatState } from '../context/chat.provider';
 
-const ProfileModal = ({ children }) => {
+const ProfileModal = ({ user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user: userItem } = ChatState();
+  // const { user: userItem } = ChatState();
 
-  useEffect(() => {
-   
-  }, [userItem]);
+ 
   return (
     <>
       {children ? (
@@ -43,7 +40,7 @@ const ProfileModal = ({ children }) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader display='flex' justifyContent='center'>
-            {userItem?.username || "User Profile"}
+            {user?.username || "User Profile"}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
@@ -55,10 +52,10 @@ const ProfileModal = ({ children }) => {
             <Avatar
               borderRadius="full"
               boxSize="150px"
-              src={userItem?.profileImage || ''}
-              alt={userItem?.username || 'Avatar'}
+              src={user?.profileImage}
+              alt={user?.username}
             />
-            <Text mt={4}>{userItem?.email || 'No email available'}</Text>
+            <Text mt={4}>{user?.email}</Text>
           </ModalBody>
           <ModalFooter>
             <Button colorScheme='blue' mr={3} onClick={onClose}>

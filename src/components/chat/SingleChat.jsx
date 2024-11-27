@@ -43,7 +43,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket = io(ENDPOINT)
     socket.emit("setup", user)
-    socket.on('connection', () => {
+    socket.on('connected', () => {
       setSocketConnected(true)
     })
       
@@ -131,7 +131,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   }, [selectedChat]);
 
-// console.log(notification);
 
   useEffect(() => {
     socket.on('message received', (newMessageReceived) => {
@@ -140,7 +139,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         if (!notification.includes(newMessageReceived)) {
           setNotification([newMessageReceived, ...notification])
           setFetchAgain(!fetchAgain)
-}
+        }
+        console.log(notification);
+
 
       }
       else {

@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import { Button, FormControl, FormLabel, Input, VStack, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ChatState } from '../context/chat.provider';
 
 const Login = () => {
+
+  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  const { setUser } = ChatState();
+
   const toast = useToast();
+
   const navigate = useNavigate();
 
   const submitHandle = async () => {
@@ -45,7 +53,7 @@ const Login = () => {
         isClosable: true,
         position: 'bottom',
       });
-
+      setUser(data)
       localStorage.setItem('userInfo', JSON.stringify(data));
       setLoading(false);
       navigate('/chat');
@@ -95,14 +103,14 @@ const Login = () => {
         >
           Login
         </Button>
-        <Button
+        {/* <Button
           onClick={loginHandle}
           colorScheme='green'
           width='100%'
           style={{ marginTop: 15 }}
         >
           Forgot Password
-        </Button>
+        </Button> */}
       </VStack>
     </div>
   );

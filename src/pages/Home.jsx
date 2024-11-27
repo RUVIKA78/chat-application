@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { Box, Container, Text } from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import "../App.css"
 import Login from './Login'
 import Signup from './Signup'
-import { useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 
 
 const Home = () => {
@@ -24,7 +23,7 @@ const Home = () => {
   return (
     <Container maxW='xl' centerContent >
       <Box
-        d='flex'
+        display='flex'
         justifyContent='center'
         p={3}
         bg='white'
@@ -45,7 +44,7 @@ const Home = () => {
         borderRadius="lg"
         borderWidth="1px"
       >
-        <Tabs variant='soft-rounded' colorScheme='blue'>
+        <Tabs isFitted variant='soft-rounded' colorScheme='blue'>
           <TabList
             mb="1em">
             <Tab width="50%">Login</Tab>

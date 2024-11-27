@@ -27,7 +27,6 @@ const GroupModal = ({ children }) => {
     const [search, setSearch] = useState("")
     const [searchResult, setSearchResult] = useState([])
     const [loading, setLoading] = useState(false)
-    const[renameLoading, setRenameLoading]=useState(false)
     const toast = useToast()
 
     const { user, setChats, chats } = ChatState()
@@ -44,7 +43,8 @@ const GroupModal = ({ children }) => {
                     Authorization: `Bearer ${user.token}`
                 }
             }
-            const { data } = await axios.get(`http://localhost:4000/api/user?search=${query}`, config)
+            const { data } = await axios.get(`http://localhost:4000/api/user?search=${search}`, config)
+            
             setLoading(false)
             setSearchResult(data)
         } catch (error) {
@@ -77,7 +77,7 @@ const GroupModal = ({ children }) => {
                     Authorization: `Bearer ${user.token}`
                 }
             }
-            const { data } = await axios.post("http://localhost:4000/api/chat/group", {
+            const data = await axios.post("http://localhost:4000/api/chat/group", {
                 name: groupChatName,
                 users: JSON.stringify(selectedUser.map((u) => u._id))
             }, config)
@@ -91,7 +91,7 @@ const GroupModal = ({ children }) => {
                 position: 'bottom'
             })
         } catch (error) {
-            console.log(error.response.data)
+            // console.log(error.response.data)
             toast({
                 title: 'Failed to create group chat',
                 description: error.response.data.message,

@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { ChatState } from '../../context/chat.provider';
 import ProfileModal from '../ProfileModal';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ChatLoading from './ChatLoading';
 import UserListItem from './UserListItem';
@@ -31,13 +31,14 @@ const SideDrawer = () => {
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingChat, setLoadingChat] = useState(false);
+    
     const toast = useToast();
 
     const { user, setSelectedChat, chats, setChats, notification, setNotification } = ChatState();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
     const navigate = useNavigate()
-
+    // console.log(notification)
     const logoutHandle = () => {
         localStorage.removeItem("userInfo");
         navigate('/');
@@ -64,9 +65,10 @@ const SideDrawer = () => {
             };
 
             const { data } = await axios.get(`http://localhost:4000/api/user?search=${search}`, config);
+            console.log(data);
+            setSearchResult(data);
 
             setLoading(false);
-            setSearchResult(data);
 
         } catch (error) {
             console.log(error);
@@ -142,22 +144,24 @@ const SideDrawer = () => {
                         </MenuButton>
                         <MenuList pl={2}>
                             {!notification.length && "No New Messages"}
-                            {notification.map((notify) => (
+                            {
+                            
+                                notification.map((notify) => (
                                 <MenuItem key={notify.id} onClick={() => {
                                     setSelectedChat(notify.chat)
                                     setNotification(notification.filter((n) => n !== notify))
-                                }}>{notification.chat.isGroupChat ? `New Message ${notify.chat.chatName}` : `New Message from ${getSender(user, notification.chat.users)}`}</MenuItem>
+                                }}>{notification.chat.isGroupChat ? `New Message ${notify.chat.chatName}` : `New Message from ${getSender(user, notify.chat.users)}`}</MenuItem>
                             ))
                             }
                         </MenuList>
                     </Menu>
                     <Menu>
                         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                            <Avatar size='sm' cursor='pointer' />
+                            <Avatar size='sm' cursor='pointer' name={user.username} src={user.profileImage} />
                         </MenuButton>
 
                         <MenuList>
-                            <ProfileModal>
+                            <ProfileModal user={user}>
                                 <MenuItem>My Profile</MenuItem>
                             </ProfileModal>
                             <MenuDivider />
@@ -190,7 +194,7 @@ const SideDrawer = () => {
                         {loading ? (
                             <ChatLoading />
                         ) : (
-                            searchResult?.map((user) => (
+                            searchResult.map((user) => (
                                 <UserListItem
                                     key={user._id}
                                     user={user}

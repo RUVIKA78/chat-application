@@ -223,6 +223,7 @@ const UpdateGroupChat = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
                 <UserBadgeItem
                   key={u._id}
                   user={u}
+                  admin={selectedChat.isAdmin}
                   handleFunction={() => handleRemove(u)}
                 />
               ))}

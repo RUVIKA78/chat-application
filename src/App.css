@@ -1,11 +1,12 @@
 .App {
     min-height: 100vh;
     /* width: 100vw; */
-    background-image: url('./bg.jpg');
+    background: url('https://as2.ftcdn.net/v2/jpg/01/95/42/21/1000_F_195422106_cNzNOmCmgf0QbxDVfuOoEc2zEl0gYIL0.jpg');
+
+/* background: red; */
     display: flex;
     background-size: cover;
     background-position: center;
-    font-size: larger;
 }
 ::-webkit-scrollbar{
     width: 60px;

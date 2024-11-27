@@ -1,17 +1,17 @@
-import { Box, CloseButton, Text } from '@chakra-ui/react'
+import { Badge, CloseButton } from '@chakra-ui/react'
 import React from 'react'
 
-const UserBadgeItem = ({user, handlefunction}) => {
+const UserBadgeItem = ({user, handlefunction,admin}) => {
     
     return (
-      <Box
+      <Badge
           px={2}
           py={2}
           borderRadius='lg'
           m={1}
           mb={2}
           variant="solid"
-          colorScheme='putple'
+          colorScheme='purple'
           cursor='pointer'
         onClick={handlefunction}
         backgroundColor='purple'
@@ -21,9 +21,10 @@ const UserBadgeItem = ({user, handlefunction}) => {
         alignItems='center'
       >
         {user.username}
+        {admin===user._id && <span>(Admin)</span>}
           <CloseButton/>
           
-    </Box>
+    </Badge>
   )
 }
 

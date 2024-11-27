@@ -5,14 +5,17 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 const Signup = () => {
+
+    
+    
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
-    const [profile, setProfile] = useState('')
+    const [profile, setProfile] = useState()
     const [loading, setLoading] = useState(false)
     const toast = useToast()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const postDetails = (profiles) => {
         setLoading(true)
@@ -86,7 +89,7 @@ const Signup = () => {
                 isClosable: true,
                 position: "bottom"
             })
-            setLoading(false)
+            // setLoading(false)
 
             return
         }
@@ -98,7 +101,7 @@ const Signup = () => {
             }
 
             const userData = { username: name, email, password, profileImage: profile };
-        console.log('Sending user data:', userData); 
+        // console.log('Sending user data:', userData); 
 
         const { data } = await axios.post(
             "http://localhost:4000/api/user",
@@ -121,7 +124,7 @@ const Signup = () => {
             navigate('/chat')
         } catch (error) {
             
-            console.log("error occured during registration", error);
+            // console.log("error occured during registration", error);
             toast({
                 title: 'Error Occured, Try Again!',
                 description: error.response.data.message,

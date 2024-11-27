@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const ChatContext = createContext()
 
@@ -7,8 +7,8 @@ const ChatProvider = ({ children }) => {
     
     const [user, setUser] = useState()
     const [selectedChat, setSelectedChat] = useState()
-    const [chats, setChats] = useState([])
-const [notification, setNotification]=useState([])
+    const [chats, setChats] = useState()
+    const [notification, setNotification]=useState([])
 
     const navigate = useNavigate()
     
@@ -25,7 +25,16 @@ const [notification, setNotification]=useState([])
     
     
     return <ChatContext.Provider
-        value={{user, setUser, setSelectedChat, selectedChat, chats, setChats, notification, setNotification}}
+        value={{
+            user,
+            setUser,
+            setSelectedChat,
+            selectedChat,
+            chats,
+            setChats,
+            notification,
+            setNotification
+        }}
     >
         {children}
     </ChatContext.Provider>

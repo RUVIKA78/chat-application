@@ -19,7 +19,6 @@ const MyChats = ({ fetchAgain }) => {
     try {
      
       // console.log('user or  token not available', user);
-      console.log(user.token);
       if (!user || !user.token) {
         toast({
           title: 'Authorization error',
@@ -56,7 +55,7 @@ const MyChats = ({ fetchAgain }) => {
   
       
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem('userInfo')))
+    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")))
    
     fetchChats();
   }, [fetchAgain]);
@@ -120,10 +119,12 @@ const MyChats = ({ fetchAgain }) => {
                   key={chat._id}
                 >
                   <Text>
-                    {!chat.isGroupChat
-                      ? getSender(loggedUser, chat.users)
-                      : chat.chatName}
-                  </Text>
+  {!chat.isGroupChat
+      ? getSender(loggedUser, chat.users)
+     
+    : chat.chatName}
+</Text>
+
                   {chat.latestMessage && (
                   <Text fontSize="xs">
                     <b>{chat.latestMessage.sender.username} : </b>
