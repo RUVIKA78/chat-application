@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-notification-badge": "^1.5.1",
+    "socket.io": "^4.7.5"
+  }
+}
